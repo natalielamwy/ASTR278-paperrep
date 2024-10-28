@@ -13,6 +13,7 @@ from astropy.io import fits
 from astropy.table import Table
 from astropy.utils.data import download_file
 import shutil
+from scipy.ndimage import zoom
 
 import os
 from pathlib import Path
@@ -131,13 +132,16 @@ def main():
     n_gals = df.shape[0]
 
     for row in df.itertuples():
-        dst = f"{opt.output}/{row.SpecObjID:d}.npy"
+        dst = f"{opt.output}/temp/{row.SpecObjID:d}.npy"
 
         if not os.path.isfile(dst):
             try:
                 urls = geturl(row.ra, row.dec, size=size, filters=filters, format=image_format)
                 image = np.array([fits.getdata(download_file(url, show_progress=False)) for url in urls])
-                np.save(dst, image)
+                zoom_factor = 64 / int(size)
+                image_resized = np.array([zoom(im, zoom_factor) for im in image])
+                np.save(dst, image_resized)
+                # np.save(dst, image)
                 time.sleep(0.001)
             except (urllib.error.HTTPError, urllib.error.URLError):
                 pass

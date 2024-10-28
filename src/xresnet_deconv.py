@@ -1,5 +1,5 @@
 
-from fastai2.vision.all import *
+from fastai.vision.all import *
 from deconvolution.models.deconv import FastDeconv # from `deconvolution` repo
 
 class DeconvLayer(nn.Sequential):

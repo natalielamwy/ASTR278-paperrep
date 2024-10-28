@@ -1,5 +1,5 @@
-from fastai2.basics import *
-from fastai2.vision.all import *
+from fastai.basics import *
+from fastai.vision.all import *
 
 
 __all__ = ['grizyTensorImage', 'grizyImageBlock', 'grizyCrop', 'norm', 'open_npy', 'show_composite', 'show_decoded_results'] + [f'vae_{i}' for i in range(1, 7)]

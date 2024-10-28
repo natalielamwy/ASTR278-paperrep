@@ -1,5 +1,5 @@
-from fastai2.basics import *
-from fastai2.vision.all import *
+from fastai.basics import *
+from fastai.vision.all import *
     
 __all__ = ['root_mean_squared_error', 'replace_model_layer', 'GeM', 'gem', 'simple_cnn']    
 
